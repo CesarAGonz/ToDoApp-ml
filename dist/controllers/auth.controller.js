@@ -26,6 +26,8 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     const { username, password } = req.body;
     const [users] = yield database_1.db.query('SELECT * FROM users WHERE username = ?', [username]);
     if (users.length === 0) {
