@@ -17,14 +17,15 @@ const database_1 = require("../config/database");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     const { username, password } = req.body;
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     yield database_1.db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword]);
     res.status(201).json({ message: 'User registered' });
-    //TODO: No repetir usuarios y generar mensaje de errror
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     const { username, password } = req.body;
     const [users] = yield database_1.db.query('SELECT * FROM users WHERE username = ?', [username]);
     if (users.length === 0) {

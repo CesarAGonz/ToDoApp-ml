@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTask = exports.updateTask = exports.createTask = exports.getTasks = void 0;
 const database_1 = require("../config/database");
 const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const [tasks] = yield database_1.db.query('SELECT * FROM tasks WHERE userId = ?', [req.userId]);
         res.json(tasks);
@@ -22,6 +23,7 @@ const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getTasks = getTasks;
 const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const newTask = Object.assign(Object.assign({}, req.body), { userId: req.userId });
         yield database_1.db.query('INSERT INTO tasks SET ?', [newTask]);
@@ -33,6 +35,7 @@ const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.createTask = createTask;
 const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const taskId = req.params.id;
         const updatedTask = req.body;
@@ -45,6 +48,7 @@ const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.updateTask = updateTask;
 const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const taskId = req.params.id;
         yield database_1.db.query('DELETE FROM tasks WHERE id = ? AND userId = ?', [taskId, req.userId]);
