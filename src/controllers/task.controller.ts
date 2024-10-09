@@ -2,6 +2,14 @@ import { Request, Response } from 'express'
 import { db } from '../config/database'
 import { Task } from '../models/task.model'
 
+export const getDemo = async (req: Request, res: Response) => {
+    try {
+      res.json('hoOla')
+    } catch (error) {
+      res.status(500).json({ message: 'Error retrieving tasks', error })
+    }
+  }
+
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const [tasks] = await db.query('SELECT * FROM tasks WHERE userId = ?', [req.userId])
