@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const register = async (req: Request, res: Response) => {
+  res.header('Access-Control-Allow-Origin', '*');
   const { username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   await db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword]);
@@ -11,6 +12,7 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+  res.header('Access-Control-Allow-Origin', '*');
   const { username, password } = req.body;
   const [users]: any = await db.query('SELECT * FROM users WHERE username = ?', [username]);
 
