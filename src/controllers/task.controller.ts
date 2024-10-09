@@ -3,7 +3,6 @@ import { db } from '../config/database'
 import { Task } from '../models/task.model'
 
 export const getTasks = async (req: Request, res: Response) => {
-  res.header('Access-Control-Allow-Origin', '*');
   try {
     const [tasks] = await db.query('SELECT * FROM tasks WHERE userId = ?', [req.userId])
     res.json(tasks)
@@ -13,7 +12,6 @@ export const getTasks = async (req: Request, res: Response) => {
 }
 
 export const createTask = async (req: Request, res: Response) => {
-  res.header('Access-Control-Allow-Origin', '*');
   try {
     const newTask: Task = { ...req.body, userId: req.userId }
     await db.query('INSERT INTO tasks SET ?', [newTask])
@@ -24,7 +22,6 @@ export const createTask = async (req: Request, res: Response) => {
 }
 
 export const updateTask = async (req: Request, res: Response) => {
-  res.header('Access-Control-Allow-Origin', '*');
   try {
     const taskId = req.params.id
     const updatedTask: Task = req.body
@@ -36,7 +33,6 @@ export const updateTask = async (req: Request, res: Response) => {
 }
 
 export const deleteTask = async (req: Request, res: Response) => {
-  res.header('Access-Control-Allow-Origin', '*');
   try {
     const taskId = req.params.id
     await db.query('DELETE FROM tasks WHERE id = ? AND userId = ?', [taskId, req.userId])

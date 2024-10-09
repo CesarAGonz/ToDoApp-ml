@@ -7,9 +7,11 @@ const express_1 = __importDefault(require("express"));
 const task_routes_1 = __importDefault(require("./routes/task.routes"));
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
