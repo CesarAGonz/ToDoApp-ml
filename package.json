@@ -1,19 +1,29 @@
 {
   "name": "todoapp-ml",
   "version": "1.0.0",
-  "description": "Node js and Express",
-  "main": "index.js",
-  "type": "module",
+  "description": "Node.js, Express, TypeScript ToDo App API",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "node --watch ./index.js",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --env-file .env --watch ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "CesarAGnz",
   "license": "ISC",
   "dependencies": {
-    "express": "4.21.1"
+    "express": "^4.21.1",
+    "mysql2": "^2.3.3",
+    "dotenv": "^16.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/node": "^16.11.10",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4",
     "standard": "17.1.2"
   },
   "eslintConfig": {
